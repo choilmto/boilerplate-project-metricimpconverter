@@ -3,7 +3,7 @@ name: PR workflow
 on: push
 
 jobs:
-  lint-dockerfile:
+  lint-dockerfile-yaml:
     name: Lint Dockerfile
     runs-on: ubuntu-latest
 
@@ -12,5 +12,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '14.15.0'
-      - run: npm install
+      - run: npm install --also=dev
       - run: npm run lint-dockerfile
+      - run: npm run lint-yaml
