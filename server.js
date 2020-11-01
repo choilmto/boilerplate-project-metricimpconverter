@@ -8,6 +8,7 @@ var cors = require('cors');
 var apiRoutes = require('./routes/api.js');
 var fccTestingRoutes = require('./routes/fcctesting.js');
 var runner = require('./test-runner');
+var logger = require("./logger");
 
 var app = express();
 
@@ -41,16 +42,16 @@ app.use(function (req, res, next) {
 
 const port = process.env.PORT || 3000;
 app.listen(port, function () {
-  console.log("Listening on port " + port);
+  logger.info("Listening on port " + port);
   if (process.env.NODE_ENV === 'test') {
-    console.log('Running Tests...');
+    logger.info('Running Tests...');
     setTimeout(function () {
       try {
         runner.run();
       } catch (e) {
         var error = e;
-        console.log('Tests are not valid:');
-        console.log(error);
+        logger.error('Tests are not valid:');
+        logger.error(error);
       }
     }, 1500);
   }
