@@ -98,7 +98,7 @@ suite("Unit Tests", function () {
       var inputs = ["gal", "l", "mi", "km", "lbs", "kg"];
       var expect = [
         "gallons",
-        "litres",
+        "liters",
         "miles",
         "kilometers",
         "pounds",
@@ -182,9 +182,9 @@ suite("Unit Tests", function () {
   suite("Function convertHandler.getString(unit)", function () {
     test("With valid initial input and conversions", function (done) {
       var initNum = 10,
-        initUnit = "gallons",
+        initUnit = "gal",
         returnNum = 37.8541,
-        returnUnit = "liters";
+        returnUnit = "l";
       var expect = "10 gallons converts to 37.8541 liters";
       assert.equal(
         convertHandler.getString(initNum, initUnit, returnNum, returnUnit),

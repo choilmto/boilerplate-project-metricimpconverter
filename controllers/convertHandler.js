@@ -19,7 +19,8 @@ function ConvertHandler() {
   };
 
   this.getUnit = function (input) {
-    var unit = input.split(/^[^A-Za-z]+/)[0];
+    var factorLength = input.split(/[A-Za-z]+/)[0].length;
+    var unit = input.substring(factorLength);
     var result = unit.toLowerCase().match(/^(gal|l|mi|km|lbs|kg)$/);
     if (result === null) {
       return "invalid unit";
@@ -46,7 +47,7 @@ function ConvertHandler() {
   this.spellOutUnit = function (unit) {
     const fullForm = {
       gal: "gallons",
-      l: "litres",
+      l: "liters",
       mi: "miles",
       km: "kilometers",
       lbs: "pounds",
@@ -68,13 +69,14 @@ function ConvertHandler() {
       mi: miToKm,
       km: 1 / miToKm,
     };
-    var result = initNum * conversions[initUnit];
-
+    var result = initNum * conversions[initUnit.toLowerCase()];
     return result;
   };
 
   this.getString = function (initNum, initUnit, returnNum, returnUnit) {
-    var result = `${initNum} ${initUnit} converts to ${returnNum} ${returnUnit}`;
+    var result = `${initNum} ${this.spellOutUnit(
+      initUnit
+    )} converts to ${returnNum} ${this.spellOutUnit(returnUnit)}`;
     return result;
   };
 }
