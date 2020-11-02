@@ -10,7 +10,8 @@
     "start": "node server.js",
     "lint-dockerfile": "dockerfilelint Dockerfile",
     "lint-yaml": "eslint . --ext .yml",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "test": "NODE_ENV=test node server.js"
   },
   "dependencies": {
     "body-parser": "^1.15.2",

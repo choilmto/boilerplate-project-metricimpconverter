@@ -8,26 +8,51 @@
 
 function ConvertHandler() {
   this.getNum = function (input) {
-    var result;
-
+    var factor = input.split(/[A-Za-z]+/)[0].split("/");
+    var numerator = factor[0] === "" ? 1 : parseFloat(factor[0]);
+    var denominator = factor.length === 1 ? 1 : parseFloat(factor[1]);
+    var result = numerator / denominator;
+    if (Number.isNaN(result) || factor.length > 2) {
+      return "invalid number";
+    }
     return result;
   };
 
   this.getUnit = function (input) {
-    var result;
-
-    return result;
+    var unit = input.split(/^[^A-Za-z]+/)[0];
+    var result = unit.toLowerCase().match(/^(gal|l|mi|km|lbs|kg)$/);
+    if (result === null) {
+      return "invalid unit";
+    }
+    return unit;
   };
 
   this.getReturnUnit = function (initUnit) {
-    var result;
-
+    const imperialToMetric = {
+      gal: "l",
+      mi: "km",
+      lbs: "kg",
+    };
+    const metricToImperial = {
+      l: "gal",
+      km: "mi",
+      kg: "lbs",
+    };
+    var unit = initUnit.toLowerCase();
+    var result = imperialToMetric[unit] || metricToImperial[unit];
     return result;
   };
 
   this.spellOutUnit = function (unit) {
-    var result;
-
+    const fullForm = {
+      gal: "gallons",
+      l: "litres",
+      mi: "miles",
+      km: "kilometers",
+      lbs: "pounds",
+      kg: "kilograms",
+    };
+    var result = fullForm[unit.toLowerCase()];
     return result;
   };
 
@@ -35,14 +60,21 @@ function ConvertHandler() {
     const galToL = 3.78541;
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
-    var result;
+    const conversions = {
+      gal: galToL,
+      l: 1 / galToL,
+      lbs: lbsToKg,
+      kg: 1 / lbsToKg,
+      mi: miToKm,
+      km: 1 / miToKm,
+    };
+    var result = initNum * conversions[initUnit];
 
     return result;
   };
 
   this.getString = function (initNum, initUnit, returnNum, returnUnit) {
-    var result;
-
+    var result = `${initNum} ${initUnit} converts to ${returnNum} ${returnUnit}`;
     return result;
   };
 }
