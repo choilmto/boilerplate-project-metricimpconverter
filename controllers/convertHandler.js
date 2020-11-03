@@ -69,7 +69,8 @@ function ConvertHandler() {
       mi: miToKm,
       km: 1 / miToKm,
     };
-    var result = initNum * conversions[initUnit.toLowerCase()];
+    var resultNum = initNum * conversions[initUnit.toLowerCase()];
+    var result = parseFloat(resultNum.toFixed(5));
     return result;
   };
 
