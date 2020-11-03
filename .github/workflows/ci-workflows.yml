@@ -15,3 +15,15 @@ jobs:
       - run: npm install --also=dev
       - run: npm run lint-dockerfile
       - run: npm run lint-yaml
+
+  test:
+    name: Unit and Functional Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "14.15.0"
+      - run: npm install --also=dev
+      - run: npm run test
