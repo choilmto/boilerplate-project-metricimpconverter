@@ -22,13 +22,13 @@ module.exports = function (app) {
     var initNum = convertHandler.getNum(input);
     var initUnit = convertHandler.getUnit(input);
     if (initNum === INVALID_NUMBER && initUnit === INVALID_UNIT) {
-      res.json({ error: "invalid number and unit" });
+      res.send("invalid number and unit");
       return;
     } else if (initNum === INVALID_NUMBER) {
-      res.json({ error: "invalid number" });
+      res.send("invalid number");
       return;
     } else if (initUnit === INVALID_UNIT) {
-      res.json({ error: "invalid unit" });
+      res.send("invalid unit");
       return;
     }
     var returnNum = convertHandler.convert(initNum, initUnit);
